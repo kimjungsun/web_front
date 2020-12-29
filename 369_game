@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>   
+    
+</head>
+<body style = "text-align:center;">
+    <h1>  
+        369 GAME made by MEGAN
+    </h1> 
+     
+     <input id="speed">
+
+<button type="button" id="ch" onclick="speed_check(this.id)">ok</button>
+    </br>
+</br>
+
+<img src="test.jpg" id= "10" width="200" height="100" onclick="getStart(this.id)">
+   
+        
+    <p id = "r" style =  
+    "font-size: 40px; font-weight: bold;"> 
+</p> 
+<p id = "s" style =  
+        "font-size: 30px; font-weight: bold;"> 
+    </p> 
+    <button id="8" onclick="paused(this.id)" style =  
+    "font-size: 30px; font-weight: bold;">
+        Pause
+    </button>
+    <button id="9" onclick="restart(this.id)" style =  
+    "font-size: 30px; font-weight: bold;">
+        Restart
+    </button>
+    <p id = "f" style =  
+        "font-size: 30px; font-weight: bold;"> 
+    </p> 
+    <p id = "f2" style =  
+        "font-size: 30px; font-weight: bold;"> 
+    </p> 
+    <p id = "cu_sp" style =  
+        "font-size: 30px; font-weight: bold;"> 
+    </p> 
+    <script>
+        var speed = {val:1000};
+        var start= document.getElementById("s"); 
+        var run= document.getElementById("r"); 
+        var finish= document.getElementById("f"); 
+        var finish2= document.getElementById("f2"); 
+        var current= document.getElementById("cu_sp"); 
+
+        //start.innerHTML =;
+        var nums = new Array(300);
+        for( var i = 0; i<nums.length;i++){
+            nums[i] = i;
+        }
+        var i = 0;
+        var wr = 0;
+        var ri = 0;
+        
+        var auto = setInterval(function() { i++; run.innerHTML = nums[i];start.innerHTML = "</br>";
+          current.innerHTML = speed.val;
+    }, speed_return());
+
+        function paused(clicked){
+            clearInterval(auto);
+            st = "You got "+ String(wr) + " wrong.";
+            st2 = "You got "+ String(ri) + " right.";
+        finish.innerHTML = st;
+        finish2.innerHTML = st2;
+       
+
+      }
+      function restart(clicked){
+        finish.innerHTML = "";
+        finish2.innerHTML = "";
+        auto =setInterval(function() { i++; run.innerHTML = nums[i];start.innerHTML = "</br> ";   current.innerHTML = speed.val;
+    }, speed_return());
+      }
+        function getStart(clicked){
+            
+         if(String(nums[i]).search('3')>=0 || String(nums[i]).search('6')>=0 || String(nums[i]).search('9')>=0){
+             start.innerHTML = "OKAY !";
+             ri ++;
+         }
+         else{
+             start.innerHTML =  "You got wrong!";
+             wr++;
+         }
+
+      }
+        function speed_check(clicked){
+            clearInterval(auto);
+            
+           speed.val = document.getElementById("speed").value;
+           auto = setInterval(function() { i++; run.innerHTML = nums[i];start.innerHTML = "</br>";   current.innerHTML = speed.val;
+    }, speed_return());
+        }
+        function speed_return(){
+            return speed.val;
+        }
+        </script>
+    </body>
+</html>
