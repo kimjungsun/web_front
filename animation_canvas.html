@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <script type="application/javascript">
+
+        var two = new Image();
+        var two2 = new Image();
+        var one = new Image();
+        var zero = new Image();
+
+        var ctx;
+        var y_top = 0;
+        var y_bottom = 740;
+        var set_id;
+        var set_id2;
+
+        var x_text = 100;
+        var y_text = 0;
+    function init(){
+        two.src = 'http://127.0.0.1:5500/two.png';
+        two2.src = 'http://127.0.0.1:5500/two2.png';
+        one.src = 'http://127.0.0.1:5500/one.png';
+        zero.src = 'http://127.0.0.1:5500/zero.png';
+
+        window.requestAnimationFrame(draw);
+       //set_id = setInterval(draw, 60);
+    }
+    function drawtext(){
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.font = '110px serif';
+        canvas.backgroundColor = 'white';
+      //  ctx.textAlign = 'center';
+       // ctx.fillStyle= "red";  // black
+       //ctx.fillText('hello',200,200);
+       ctx.shadowBlur = 40;
+
+       ctx.fillStyle= "pink";
+        ctx.fillText('happy new year!', x_text, y_text);
+        //ctx.fillStyle= "blue";
+        ctx.fillText('happy new year!', x_text, y_text);
+        if(y_text <300){
+           // ctx.save();
+           y_text++;
+
+         //clearInterval(set_id2);
+
+        }
+        else{
+            set_id2 = setInterval(drawtext, 80);
+        }
+
+    }
+    function draw() {
+        var flag = 0;
+        var canvas = document.getElementById('canvas');
+        if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, 1500, 1500); // clear canvas
+
+        var dis = 250;
+        if(y_top <350){
+            y_top +=20;
+            
+        }
+        else{
+            clearInterval(set_id);
+            flag = 1;
+            ctx.save();
+            //setInterval(drawtext, 10);
+            drawtext();
+            //window.requestAnimationFrame(drawtext(ctx));
+
+        }
+        if(y_bottom >370)
+            y_bottom -= 20;
+
+        ctx.drawImage(two, dis, y_top); 
+        dis += two.width;
+        ctx.drawImage(zero, dis, y_bottom);
+        dis += zero.width;
+
+        ctx.drawImage(two2, dis,  y_top);
+        dis += two2.width;
+        ctx.drawImage(one, dis, y_bottom);
+
+       //window.requestAnimationFrame(draw);
+       if(flag==0)
+           set_id = setInterval(draw, 80);
+
+      }
+    }
+  </script>
+ </head>
+ <body onload="init();">
+   <canvas id="canvas" width="1500" height="1500"></canvas>
+   
+ </body>
+</html>
